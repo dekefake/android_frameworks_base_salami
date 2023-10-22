@@ -1101,12 +1101,11 @@ public class UdfpsController implements DozeReceiver, Dumpable {
                     + " current: " + mOverlay.getRequestId());
             return;
         }
-
-        updateViewDimAmount(true);
         
         if (isOptical()) {
             mLatencyTracker.onActionStart(LatencyTracker.ACTION_UDFPS_ILLUMINATE);
         }
+
         // Refresh screen timeout and boost process priority if possible.
         mPowerManager.userActivity(mSystemClock.uptimeMillis(),
                 PowerManager.USER_ACTIVITY_EVENT_TOUCH, 0);
@@ -1150,6 +1149,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
                     mFingerprintManager.onUiReady(requestId, mSensorProps.sensorId);
                     mLatencyTracker.onActionEnd(LatencyTracker.ACTION_UDFPS_ILLUMINATE);
                 }
+                updateViewDimAmount(true);
             });
         }
 
